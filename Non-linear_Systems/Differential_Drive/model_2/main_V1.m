@@ -32,11 +32,11 @@
 
 % Define cost function parameters
 q = 6;  % Q = q*I
-r = 0.5;% R = r*I
+r = 0.1;% R = r*I
 m = 3;  % M = m*I
 
 % Generate collocation points using a grid.
-nPoints = 20; % Number of points in each dimension
+nPoints = 10; % Number of points in each dimension
 t = linspace(0, 1, nPoints);
 x = linspace(-1, 1, nPoints);
 y = linspace(-1, 1, nPoints);
@@ -87,7 +87,7 @@ net = dlupdate(@double,net);
 
 %% Specify Training Options
 % Train for 5000 iterations using L-BFGS.
-maxIterations = 1000;
+maxIterations = 2000;
 gradientTolerance = 1e-5;
 stepTolerance = 1e-5;
 solverState = lbfgsState;
@@ -156,8 +156,8 @@ title('Loss History')
 % Define an initial state and simulate the differential drive robot's
 % trajectory using the optimal controller derived from the trained PINN.
 
-x_init = [0.5; 0.5; pi]; % Initial state [x, y, theta]
-tspan = linspace(0, 5, 1001);
+x_init = [0.5; 0.5; pi/2]; % Initial state [x, y, theta]
+tspan = linspace(0, 1, 1001);
 dt = tspan(2) - tspan(1);
 
 states = zeros(length(tspan), 3);
